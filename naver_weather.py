@@ -24,9 +24,8 @@ def naver_weather(keyword):
     return "["+address_name+"] 날씨 ", temp+mark,cast_txt,dust_text+": "+dust+" "+dust_criteria, ultra_dust_text+": "+ultra_dust+" "+ultra_dust_criteria
 
 def get_message(bot, update):
-    # chat_id = bot.getUpdates()[-1].message.chat_id
-    # chat_id = 1643988688
-    chat_id = '-580676052'   
+
+    chat_id = '      '   
     msg = bot.message.text
     if msg == '/start':
         update.bot.send_message(chat_id, '날씨를 알려드립니다')
@@ -47,7 +46,7 @@ def get_message(bot, update):
 
 
 if __name__ == "__main__":
-    token = '1766195485:AAHrnU9jyoq-DXyRP1ETaFX9TN8k9bOQUT4'
+    token = 'TOKEN'
     updater = Updater(token, use_context= True)
     
     message_handler = MessageHandler(Filters.text, get_message)
