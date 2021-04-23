@@ -21,7 +21,12 @@ def naver_weather(keyword):
     ultra_dust_criteria = soup.find("dl", class_="indicator").find_all("dd")[1].text.split('㎍/㎥')[1]
     
     address_name = soup.find("div",class_="sort_box _areaSelectLayer").find("div", class_='select_box').find("em").text
-    return "["+address_name+"] 날씨 ", temp+mark,cast_txt,dust_text+": "+dust+" "+dust_criteria, ultra_dust_text+": "+ultra_dust+" "+ultra_dust_criteria
+    
+    today_temp = soup.find("li", class_="date_info today").find("dd").text
+    morning_rain = soup.find("span", class_="point_time morning").find("span", class_="rain_rate wet").text
+    afternoon_rain = soup.find("span", class_="point_time afternoon").find("span", class_="rain_rate").text
+    return "["+address_name+"] 날씨 ", temp+mark,cast_txt,dust_text+": "+dust+" "+dust_criteria, ultra_dust_text+": "+ultra_dust+" "+ultra_dust_criteria,\
+        "최저/최고 온도: "+today_temp,"오전"+morning_rain, "오후"+afternoon_rain
 
 def get_message(bot, update):
 
@@ -37,7 +42,7 @@ def get_message(bot, update):
     print("텔레그램 날씨 봇을 실행 중입니다!!!")
     
     if len(r)>0:
-        update.bot.send_message(chat_id, r[0]+"\n"+r[1]+r[2]+"\n"+r[3]+"\n"+r[4])
+        update.bot.send_message(chat_id, r[0]+"\n"+r[1]+r[2]+"\n"+r[3]+"\n"+r[4]+"\n"+r[5]+"\n"+r[6]+"\n"+r[7])
     else : 
         update.bot.send_message(chat_id, '검색 결과가 없습니다.')
         update.bot.send_message(chat_id, '지역명을 입력하세요')
